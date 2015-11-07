@@ -6,14 +6,14 @@ apk_dataset=$1
 backsmali_output=$2
 
 #get runtime output folder
-#Folder_runtime_out=$3
+Folder_runtime_out=$3
 
 #location of static anaysis result
-Full_Path_File_Folder = $3
+Full_Path_File_Folder=$4
 
-Folder_runtime_out=$(aapt dump badging "$*" | awk '/package/{gsub("name=|'"'"'","");  print $2}')
+#Folder_runtime_out=$(aapt dump badging "$*" | awk '/package/{gsub("name=|'"'"'","");  print $2}')
 
-cat ./$Folder_runtime_out/*.txt > catfile.txt
+cat ./$Folder_runtime_out/*.txt > ./$Folder_runtime_out/catfile.txt
 ################################
 #   backsmali for all apk in dataset folder #
 ################################
@@ -35,7 +35,7 @@ for file_a in ${apk_dataset}/*; do
 	####################################
 	python compare.py ${Folder_runtime_out} ${Full_Path_File_Folder} $temp_file catfile.txt
 	#reset all the folder, ready to analysis next app
-	rm -rf  ${backsmali_output}/*
-	rm -rf  ${Folder_runtime_out}/*
-	rm -rf  ${Full_Path_File_Folder}/*
+	#rm -rf ${backsmali_output}/*
+	#rm -rf ${Folder_runtime_out}/*
+	#rm -rf ${Full_Path_File_Folder}/*
 done

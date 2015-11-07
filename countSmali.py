@@ -25,7 +25,8 @@ def generate_output(path, smaliCount):
 			if ".smali" in name:
 				smaliCount = smaliCount + 1
 				get_full_path(root + "/" + name)
-			
+
+
 #location that store the full_path_file
 output_folder = sys.argv[1]
 
@@ -37,5 +38,5 @@ path = os.getcwd()  + "/" +apk_folder
 smaliCount = 0
 
 generate_output(path, smaliCount)
-rename_output_file(smaliCount, output_file_name, os.getcwd() + "/output_txt")
+rename_output_file(smaliCount, output_file_name, os.getcwd() + "/" + output_folder)
 print "Decomile Done for " + apk_folder
