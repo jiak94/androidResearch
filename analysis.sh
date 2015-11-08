@@ -6,7 +6,7 @@ apk_dataset=$1
 backsmali_output=baksmali
 
 #get runtime output folder
-Folder_runtime_out=$2
+#Folder_runtime_out=$2
 
 #location of static anaysis result
 Full_Path_File_Folder=static
@@ -24,6 +24,7 @@ for file_a in ${apk_dataset}/*; do
 
 	#run_time folder name
 	Folder_runtime_out=$(aapt dump badging "${temp_file}" | awk '/package/{gsub("name=|'"'"'","")}')
+	./dynamic_analysis.sh ${temp_file}
 	cat ./$Folder_runtime_out/*.txt > ./$Folder_runtime_out/catfile.txt
 	
 	java -jar baksmali-2.1.0.jar ${apk_dataset}/${temp_file} -o ${backsmali_output}/${temp_file}
