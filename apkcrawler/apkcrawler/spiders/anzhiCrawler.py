@@ -80,17 +80,16 @@ class anzhiCrawlerHot(scrapy.Spider):
 			item = ApkcrawlerItem()
 			#apk 
 			apk_name = sel.xpath("div[@class='app_info']/span[@class='app_name']/a/text()").extract()
-			item['apk_name'] = [n.encode('utf-8') for n in apk_name]
+			item['file_name'] = [n.encode('utf-8') for n in apk_name]
 			#desc link
 			desc = sel.xpath("div[@class='app_info']/span[@class='app_name']/a/@href").extract()
-			desc.insert(0, "www.anzhi.com")
+			desc.insert(0, "http://www.anzhi.com")
 			item['desc_link'] = desc[0] + desc[1]
 			#download link
 			apk_id = sel.xpath("div[@class='app_down']/a/@onclick").extract()[0]
 			apk_id = apk_id[apk_id.find("(")+1:apk_id.rfind(")")]
-			down_link = "www.anzhi.com/dl_app.php?s=" + apk_id + "&n=5"
-			item['down_link'] = down_link
-			if item not in items:
-				items.append(item)
+			down_link = "http://www.anzhi.com/dl_app.php?s=" + apk_id + "&n=5"
+			item['file_urls'] = [down_link]
+			items.append(item)
 
 		return items

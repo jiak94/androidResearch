@@ -9,6 +9,7 @@ import scrapy
 
 
 class ApkcrawlerItem(scrapy.Item):
-    apk_name = scrapy.Field()
-    down_link = scrapy.Field()
+    file_name = scrapy.Field()
+    file_urls = scrapy.Field()
     desc_link = scrapy.Field()
+    files = scrapy.Field()

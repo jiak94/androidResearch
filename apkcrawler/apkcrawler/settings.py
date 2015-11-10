@@ -62,9 +62,10 @@ NEWSPIDER_MODULE = 'apkcrawler.spiders'
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+	#'apkcrawler.files.FilesPipeline':1,
     'apkcrawler.pipelines.ApkcrawlerHotPipeline': 300,
-    'apkcrawler.pipelines.ApkcrawlerGamePipeline': 500,
 }
+# FILES_STORE = "./anzhi_apk"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
