@@ -2,11 +2,8 @@ import requests
 import json
 import os
 
-def download(url, filename):
-	r = requests.get(url)
-	with open(filename, "wb") as code:
-		code.write(r.content)
-
+def download(url):
+	os.system("wget -c --tries=0 --read-timeout=20 "+url)
 
 if __name__ == '__main__':
     js_file = open("./hot.json")
@@ -24,6 +21,6 @@ if __name__ == '__main__':
         # print filename
         # print url
         # print real_link
-        filename = real_link[real_link.rfind("/")+1:]
+        # filename = real_link[real_link.rfind("/")+1:]
         print real_link
-        download(real_link, filename)
+        download(real_link)
