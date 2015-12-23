@@ -12,4 +12,5 @@ class ApkcrawlerItem(scrapy.Item):
     file_name = scrapy.Field()
     file_urls = scrapy.Field()
     desc_link = scrapy.Field()
+    category = scrapy.Field()
     files = scrapy.Field()

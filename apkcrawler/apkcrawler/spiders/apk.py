@@ -1,8 +1,10 @@
 import scrapy
 import json
 import codecs
+import requests
+from bs4 import BeautifulSoup
 
-from scrapy.spider import Spider
+from scrapy.spiders import Spider
 from scrapy.selector import Selector
 from scrapy import log
 
@@ -78,7 +80,7 @@ class anzhiCrawlerHot(scrapy.Spider):
 		items = []
 		for sel in response.xpath("//div[@class='content_left']/div[@class='app_list border_three']/ul/li"):
 			item = ApkcrawlerItem()
-			#apk 
+			#apk
 			apk_name = sel.xpath("div[@class='app_info']/span[@class='app_name']/a/text()").extract()
 			item['file_name'] = [n.encode('utf-8') for n in apk_name]
 			#desc link
@@ -90,6 +92,11 @@ class anzhiCrawlerHot(scrapy.Spider):
 			apk_id = apk_id[apk_id.find("(")+1:apk_id.rfind(")")]
 			down_link = "http://www.anzhi.com/dl_app.php?s=" + apk_id + "&n=5"
 			item['file_urls'] = [down_link]
+			#category
+			r = requests.get(item['desc_link'])
+			soup = BeautifulSoup(r.text)
+			category = soup.find("ul", id="detail_line_ul").li.extract()
+			item['category'] = [n.encode('utf-8') for n in category]
 			items.append(item)
 
 		return items
