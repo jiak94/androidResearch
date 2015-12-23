@@ -73,7 +73,7 @@ class anzhiCrawlerHot(scrapy.Spider):
 		 "http://www.anzhi.com/list_2_27_hot.html",
 		 "http://www.anzhi.com/list_2_28_hot.html",
 		 "http://www.anzhi.com/list_2_29_hot.html",
-	     "http://www.anzhi.com/list_2_30_hot.html"
+	     "http://www.anzhi.com/list_2_30_hot.html",
 	]
 
 	def parse(self, response):
@@ -85,8 +85,8 @@ class anzhiCrawlerHot(scrapy.Spider):
 			item['file_name'] = [n.encode('utf-8') for n in apk_name]
 			#desc link
 			desc = sel.xpath("div[@class='app_info']/span[@class='app_name']/a/@href").extract()
-			# desc.insert(0, "http://www.anzhi.com")
-			item['desc_link'] = desc
+			desc.insert(0, "http://www.anzhi.com")
+			item['desc_link'] = desc[0] + desc[1]
 			#download link
 			apk_id = sel.xpath("div[@class='app_down']/a/@onclick").extract()[0]
 			apk_id = apk_id[apk_id.find("(")+1:apk_id.rfind(")")]
